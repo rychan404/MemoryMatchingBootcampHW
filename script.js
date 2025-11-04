@@ -14,6 +14,8 @@ let firstCard = null, secondCard = null;
 // You will need to lock the board to stop users from choosing cards when they choose two wrong cards
 // (Don't have to worry about this too much)
 let lockBoard = false;
+const board = document.getElementById('game-board');
+let initialized = false;
 
 /* 
     You must initialize the game board. You have been given a shuffleArray() function.
@@ -23,6 +25,20 @@ let lockBoard = false;
 */
 function initGame() {
     // Write your code here
+    cards = [];
+    board.innerHTML = '';
+    resetBoard();
+
+    for (const symbol of symbols) {
+        cards.push(symbol);
+        cards.push(symbol);
+    }
+
+    shuffleArray(cards);
+
+    for (let card of cards) {
+        createCard(card);
+    }
 
     document.getElementById('restart-btn').addEventListener('click', initGame);
 }
@@ -34,6 +50,10 @@ function initGame() {
 */
 function createCard(symbol) {
     // Write your code here
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = symbol;
+    board.append(card);
 }
 
 /*
