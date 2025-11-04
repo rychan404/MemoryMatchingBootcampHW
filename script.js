@@ -24,7 +24,6 @@ let initialized = false;
 
 */
 function initGame() {
-    // Write your code here
     cards = [];
     board.innerHTML = '';
     resetBoard();
@@ -49,7 +48,6 @@ function initGame() {
     Also make sure to add the event listener with the 'flipCard' function
 */
 function createCard(symbol) {
-    // Write your code here
     const card = document.createElement('div');
     card.className = 'card';
     card.id = symbol;
@@ -76,6 +74,7 @@ function flipCard(card) {
         firstCard = card;
     } else if (firstCard !== null && secondCard === null) {
         secondCard = card;
+        checkForMatch();
     }
 }
 
@@ -85,12 +84,11 @@ function flipCard(card) {
     Otherwise, you should unflip the card and continue playing normally.
 */
 function checkForMatch() {
-            if (firstCard.id === secondCard.id) {
-            console.log('match!');
-            disableCards();
-        } else {
-            unflipCards();
-        }
+    if (firstCard.id === secondCard.id) {
+        disableCards();
+    } else {
+        unflipCards();
+    }
 }
 
 /* 
