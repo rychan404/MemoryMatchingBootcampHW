@@ -54,6 +54,8 @@ function createCard(symbol) {
     card.className = 'card';
     card.id = symbol;
     board.append(card);
+
+    card.addEventListener('click', () => flipCard(card));
 }
 
 /*
@@ -67,7 +69,14 @@ function createCard(symbol) {
 function flipCard(card) {
     // If the board is supposed to be locked or you picked the same card you already picked
     if (lockBoard || card === firstCard) return;
-    // Write your code here
+    card.classList.add('flipped');
+    card.innerHTML = card.id;
+    
+    if (firstCard === null) {
+        firstCard = card;
+    } else if (firstCard !== null && secondCard === null) {
+        secondCard = card;
+    }
 }
 
 /* 
@@ -76,7 +85,12 @@ function flipCard(card) {
     Otherwise, you should unflip the card and continue playing normally.
 */
 function checkForMatch() {
-    // Write your code here
+            if (firstCard.id === secondCard.id) {
+            console.log('match!');
+            disableCards();
+        } else {
+            unflipCards();
+        }
 }
 
 /* 
@@ -85,7 +99,9 @@ function checkForMatch() {
     to reset the firstCard, secondCard, and lockBoard variables. (That's been written for you already)
 */
 function disableCards() {
-    // Write your code here
+    firstCard.classList.add('matched');
+    secondCard.classList.add('matched');
+    resetBoard();
 }
  
 /* ---------------------  Everything under has already been done for you -------------------------- */
